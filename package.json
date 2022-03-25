@@ -18,5 +18,11 @@
   "homepage": "https://github.com/andre00nogueira/software-quality-cypress#readme",
   "dependencies": {
     "cypress": "^9.5.2"
+  },
+  "devDependencies": {
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
