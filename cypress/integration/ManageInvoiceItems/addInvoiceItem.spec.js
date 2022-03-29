@@ -11,7 +11,17 @@ When('I click on the button with label {string}', (actionName) => {
 })
 
 Then('a new empty item is created', () => {
-    cy.get('[id^=item_]').should('have.length', 2);
+    const items = cy.get('[id^=item_]');
+    items.should('have.length', 2);
+
+    const newItem = items.eq(1);
+
+    newItem
+        .get('[aria-label="name"]')
+        .should('have.attr', 'placeholder', 'Item name');
+    newItem
+        .get('[aria-label="description"]')
+        .should('have.attr', 'placeholder', 'Item description');
 })
 
 And('the total price should be {string}', (total) => {

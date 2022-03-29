@@ -1,6 +1,6 @@
 Feature: Manage Invoice Items
 
-  Background:
+  Background: open invoice's main page
     Given I open the main page
 
   Scenario: Add new item with success
