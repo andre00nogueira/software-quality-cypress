@@ -5,16 +5,5 @@
     "APP_URL": "34.88.92.4:8080"
   },
   "video": false,
-  "screenshotOnRunFailure": false,
-  "reporter": "cypress-multi-reporters",
-  "reporterOptions": {
-    "reporterEnabled": "mochawesome",
-    "mochawesomeReporterOptions": {
-      "reportDir": "cypress/results/json",
-      "overwrite": false,
-      "html": true,
-      "json": true,
-      "quite": true
-    }
-  }
+  "screenshotOnRunFailure": false
 }
