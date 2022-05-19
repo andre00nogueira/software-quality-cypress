@@ -1,0 +1,7 @@
+{
+  "experimentalStudio": true,
+  "testFiles": "**/*.{feature,features}",
+  "env": {
+    "APP_URL": "34.88.92.4:8080"
+  }
+}
