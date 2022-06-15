@@ -7,42 +7,32 @@ Given('I open the main page', () => {
 
 
 When('I fill bill {string} fields with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
-    if(name){
+    if (name) {
         cy.get('[placeholder="Who is this invoice ' + type + '?"]').type(name)
     }
     if (type === 'to') {
-        if(email){
+        if (email) {
             cy.get(':nth-child(1) > [placeholder="Email address"]').type(email)
         }
-        if(address){
+        if (address) {
 
             cy.get(':nth-child(1) > [placeholder="Billing address"]').type(address)
         }
     } else {
-        if(email){
+        if (email) {
             cy.get(':nth-child(2) > [placeholder="Email address"]').type(email)
         }
-        if(address){
+        if (address) {
             cy.get(':nth-child(2) > [placeholder="Billing address"]').type(address)
         }
     }
 })
 
-When('I refresh the page',()=>{
+When('I refresh the page', () => {
     cy.reload()
 })
 
-Then('The {string} field is filled with name: {string}',(type, name)=>{
-    if(type==='to'){
-        cy.get('.mb-5 > :nth-child(1) > input[name="billTo"]').should(
-            "have.text",
-            ''
-        )
-    }else{
-        cy.get('.mb-5 > :nth-child(2) > input[name="billFrom"]').should(
-            "have.text",
-            ''
-        )
-    }
-
+Then('The {string} field is filled with name: {string}, email: {string}', (type, name, email) => {
+    cy.get('input[name="bill' + type + '"]').should("have.value", name);
+    cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
 })
