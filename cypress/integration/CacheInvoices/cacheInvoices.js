@@ -32,7 +32,8 @@ When('I refresh the page', () => {
     cy.reload()
 })
 
-Then('The {string} field is filled with name: {string}, email: {string}', (type, name, email) => {
+Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
+    cy.get('input[name="bill' + type + 'Address"]').should('have.value', address);
 })
