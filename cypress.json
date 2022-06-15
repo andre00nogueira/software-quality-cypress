@@ -2,6 +2,6 @@
   "experimentalStudio": true,
   "testFiles": "**/*.{feature,features}",
   "env": {
-    "APP_URL": "localhost:3000"
+    "APP_URL": "localhost:8080"
   }
 }
