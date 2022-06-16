@@ -32,8 +32,19 @@ When('I refresh the page', () => {
     cy.reload()
 })
 
+When('I select the date {string} on calendar', (date) => {
+    if (date) {
+        cy.get('.mb-3 > :nth-child(1) > .flex-row > .form-control').type(date)
+    }
+})
+
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
     cy.get('input[name="bill' + type + 'Address"]').should('have.value', address);
+})
+
+
+Then('The date field is filled with the date {string}', (date) => {
+    cy.get('input[name="dateOfIssue"]').should("have.value", date);
 })
