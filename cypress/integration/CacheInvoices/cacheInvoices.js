@@ -38,6 +38,11 @@ When('I select the date {string} on calendar', (date) => {
     }
 })
 
+When('I fill the tax rate field with value: {string}, and the discount rate field with the value: {string}', (tax, discount) => {
+    cy.get('input[name="taxRate"]').type(tax);
+    cy.get('input[name="discountRate"]').type(discount);
+})
+
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
@@ -47,4 +52,9 @@ Then('The {string} field is filled with name: {string}, email: {string}, address
 
 Then('The date field is filled with the date {string}', (date) => {
     cy.get('input[name="dateOfIssue"]').should("have.value", date);
+})
+
+Then('The the tax rate is filled with value: {string}, and the discount rate is filled with value: {string}', (tax, discount) => {
+    cy.get('input[name="taxRate"]').should("have.value", tax);
+    cy.get('input[name="discountRate"]').should("have.value", discount);
 })
