@@ -44,6 +44,7 @@ When('I fill the tax rate field with value: {string}, and the discount rate fiel
 })
 
 When('I fill the invoice number with value: {string}', (invoiceNumber) => {
+    cy.get('input[name="invoiceNumber"]').clear();
     cy.get('input[name="invoiceNumber"]').type(invoiceNumber);
 })
 When('I fill the notes with value: {string}', (notes) => {
