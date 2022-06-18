@@ -43,6 +43,13 @@ When('I fill the tax rate field with value: {string}, and the discount rate fiel
     cy.get('input[name="discountRate"]').type(discount);
 })
 
+When('I fill the invoice number with value: {string}', (invoiceNumber) => {
+    cy.get('input[name="invoiceNumber"]').type(invoiceNumber);
+})
+When('I fill the notes with value: {string}', (notes) => {
+    cy.get('textarea[name="notes"]').type(notes);
+})
+
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
@@ -57,4 +64,12 @@ Then('The date field is filled with the date {string}', (date) => {
 Then('The the tax rate is filled with value: {string}, and the discount rate is filled with value: {string}', (tax, discount) => {
     cy.get('input[name="taxRate"]').should("have.value", tax);
     cy.get('input[name="discountRate"]').should("have.value", discount);
+})
+
+Then('The invoice number is filled with the value {string}', (invoiceNumber) => {
+    cy.get('input[name="invoiceNumber"]').should("have.value", invoiceNumber);
+})
+
+Then('The notes is filled with the value {string}', (notes) => {
+    cy.get('textarea[name="notes"]').should("have.value", notes);
 })
