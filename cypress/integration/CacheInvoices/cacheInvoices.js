@@ -51,6 +51,37 @@ When('I fill the notes with value: {string}', (notes) => {
     cy.get('textarea[name="notes"]').type(notes);
 })
 
+When('No fields are filled', () => {
+    cy.get('input[name="dateOfIssue"]').should("have.value", '');
+    cy.get('input[name="billTo"]').should('have.value', '');
+    cy.get('input[name="billToEmail"]').should('have.value', '');
+    cy.get('input[name="billToAddress"]').should('have.value', '');
+    cy.get('input[name="billFrom"]').should('have.value', '');
+    cy.get('input[name="billFromEmail"]').should('have.value', '');
+    cy.get('input[name="billFromAddress"]').should('have.value', '');
+    cy.get('input[name="shipToAddress"]').should('have.value', '');
+    cy.get('input[name="name"]').should('have.value', '');
+    cy.get('textarea[name="notes"]').should("have.value", '');
+    cy.get('input[name="taxRate"]').should('have.value', '');
+    cy.get('input[name="discountRate"]').should('have.value', '');
+})
+
+When('I fill the item fields with name: {string}, description: {string}, quantity : {string} and Price: {string}', (name, description, quantity, price) => {
+
+    cy.get('input[name="name"]').last().type(name)
+    cy.get('input[name="description"]').last().type(description)
+    cy.get('input[name="quantity"]').last().clear();
+    cy.get('input[name="price"]').last().clear();
+    cy.get('input[name="quantity"]').last().type(quantity)
+    cy.get('input[name="price"]').last().type(price)
+})
+When('I click on the button with label {string}', (actionName) => {
+    cy.get('.btn').contains(actionName).click();
+})
+
+When('I click on the button Delete Item', () => {
+    cy.get('#item_0').find('#deleteItem').click();
+})
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
@@ -73,4 +104,11 @@ Then('The invoice number is filled with the value {string}', (invoiceNumber) => 
 
 Then('The notes is filled with the value {string}', (notes) => {
     cy.get('textarea[name="notes"]').should("have.value", notes);
+})
+
+Then('The item {string} fields  are filled with name: {string}, description: {string}, quantity : {string} and Price: {string}', (item, name, description, quantity, price) => {
+    cy.get('input[name="name"]').eq(item - 1).should("have.value", name);
+    cy.get('input[name="description"]').eq(item - 1).should("have.value", description);
+    cy.get('input[name="quantity"]').eq(item - 1).should("have.value", quantity);
+    cy.get('input[name="price"]').eq(item - 1).should("have.value", price);
 })
