@@ -1,4 +1,4 @@
-import { Given } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 const url = Cypress.env('APP_URL');
 Given('I open the main page', () => {
@@ -45,12 +45,42 @@ Then('I see the field {string} is equal to {string}', (firstField, value) => {
     field.should('have.value', value)
 })
 
+Then('I set the field {string} to be equal to {string}', (firstField, value) => {
+    const field = cy.get(`input[name="${firstField}"]`)
+
+    if (!value) return
+    field.type(value)
+    field.should('have.value', value)
+})
+
 And('I see the field {string} is readonly', (field) => {
     const billToAddress = cy.get(`input[name="${field}"]`)
     billToAddress.should('have.attr', 'readonly', 'readonly')
+})
+
+And('I see the field {string} is not readonly', (field) => {
+    const billToAddress = cy.get(`input[name="${field}"]`)
+    billToAddress.should('not.have.attr', 'readonly', 'readonly')
 })
 
 And('I see the {string} button is checked', (button) => {
     const input = getInputByLabel(button)
     input.should('be.checked')
 })
+
+And('I set the {string} button to be checked', (button) => {
+    const input = getInputByLabel(button)
+    input.click()
+    input.should('be.checked')
+})
+
+And('I see the {string} button is unchecked', (button) => {
+    const input = getInputByLabel(button)
+    input.should('not.be.checked')
+})
+Then(/^I set the field "([^"]*)" to be equal to "([^"]*)"$/, function () {
+
+});
+Then(/^I set the field "([^"]*)" to be equal to "([^"]*)"$/, function () {
+
+});
