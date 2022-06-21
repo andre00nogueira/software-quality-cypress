@@ -1,10 +1,18 @@
-import {Given} from "cypress-cucumber-preprocessor/steps";
+import {And, Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 
 const url = Cypress.env('APP_URL');
 Given('I open the main page', () => {
     cy.visit(url)
 })
 
+const getInputByLabel = (label) => {
+    return cy
+        .contains('label', label)
+        .invoke('attr', 'for')
+        .then((id) => {
+            cy.get('#' + id)
+        })
+}
 
 When('I fill bill {string} fields with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     if (name) {
@@ -82,6 +90,19 @@ When('I click on the button with label {string}', (actionName) => {
 When('I click on the button Delete Item', () => {
     cy.get('#item_0').find('#deleteItem').click();
 })
+
+When('I set the {string} button to be checked', (button) => {
+    const input = getInputByLabel(button)
+    input.click()
+    input.should('be.checked')
+})
+
+When('I write {string} in the field {string}', (valueToWrite, field) => {
+    const shipToAddress = cy.get(`input[name="${field}"]`)
+
+    shipToAddress.type(valueToWrite)
+})
+
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
@@ -111,4 +132,10 @@ Then('The item {string} fields  are filled with name: {string}, description: {st
     cy.get('input[name="description"]').eq(item - 1).should("have.value", description);
     cy.get('input[name="quantity"]').eq(item - 1).should("have.value", quantity);
     cy.get('input[name="price"]').eq(item - 1).should("have.value", price);
+})
+
+Then('I see the field {string} is equal to {string}', (firstField, value) => {
+    const field = cy.get(`input[name="${firstField}"]`)
+
+    field.should('have.value', value)
 })

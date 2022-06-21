@@ -27,7 +27,7 @@ Feature: Manage Shipping Address
     And I set the field "billToAddress" to be equal to "<value>"
     When I click on the button "Same as Shipping"
     Then I see the field "billToAddress" is readonly
-    And I see the field "billToAddress" is equal to ""
+    And I see the field "billToAddress" is equal to "<value>"
     And I click on the button "Same as Shipping"
     Then I see the field "billToAddress" is not readonly
     And I see the field "billToAddress" is equal to "<value>"
