@@ -103,6 +103,10 @@ When('I write {string} in the field {string}', (valueToWrite, field) => {
     shipToAddress.type(valueToWrite)
 })
 
+When('I select the currency {string}',(currency)=>{
+    cy.get('select').select(currency);
+});
+
 Then('The {string} field is filled with name: {string}, email: {string}, address: {string}', (type, name, email, address) => {
     cy.get('input[name="bill' + type + '"]').should("have.value", name);
     cy.get('input[name="bill' + type + 'Email"]').should('have.value', email);
@@ -139,3 +143,9 @@ Then('I see the field {string} is equal to {string}', (firstField, value) => {
 
     field.should('have.value', value)
 })
+
+Then('The selected currency is {string} and the shown label is {string}',(currency,currencyLabel)=>{
+    cy.get('select').should('have.value',currency);
+    cy.get('#totalPrice').contains(currency.split("")[0]);
+    cy.get('select#name option:selected').should('have.text',currencyLabel);
+});
